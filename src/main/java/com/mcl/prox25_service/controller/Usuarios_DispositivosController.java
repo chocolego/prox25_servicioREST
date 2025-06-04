@@ -44,6 +44,13 @@ public class Usuarios_DispositivosController {
         return ResponseEntity.ok(dispositivos);
     }
 
+    @GetMapping("/usuarios/{usuarioId}/dispositivos/libres")
+    public ResponseEntity<List<Dispositivos>> getDispositivosSinTargetsByUsuario(@PathVariable Integer usuarioId) {
+        List<Dispositivos> dispositivos = usuariosDispositivosService.getDispositivosSinTargetsByUsuarioId(usuarioId);
+        return ResponseEntity.ok(dispositivos);
+    }
+
+
 //    @GetMapping("/usuarios/{id}/activos")
 //    public ResponseEntity<List<Dispositivos>> getDispositivosActivos(@PathVariable Integer id) {
 //        return ResponseEntity.ok(usuariosDispositivosService.getDispositivosActivosPorUsuario(id));

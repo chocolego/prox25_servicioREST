@@ -49,9 +49,21 @@ public class Usuarios_DispositivosService {
     public List<Dispositivos> getDispositivosHistoricosByUsuarioId(Integer idUsuario) {
         List<Usuarios_Dispositivos> udsList = usuariosDispositivosRepository.findById_IdUsuarioAndHastaIsNotNull(idUsuario);
         return udsList.stream()
-                      .map(Usuarios_Dispositivos::getDispositivo)
-                      .collect(Collectors.toList());
+                .map(Usuarios_Dispositivos::getDispositivo)
+                .collect(Collectors.toList());
     }
+
+    // Get dispositivos filtrando por UsuarioID e sen targets asignados
+    public List<Dispositivos> getDispositivosSinTargetsByUsuarioId(Integer usuarioId) {
+        List<Usuarios_Dispositivos> dispsLibres = usuariosDispositivosRepository.findById_IdUsuario(usuarioId);
+
+        return dispsLibres.stream()
+                .map(Usuarios_Dispositivos::getDispositivo)
+                .filter(d -> d.getTargets() == null || d.getTargets().isEmpty())
+                .collect(Collectors.toList());
+    }
+
+
     
     //
 //    // Get dispositivos for a user with hasta = NULL (active)
