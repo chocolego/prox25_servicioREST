@@ -26,10 +26,10 @@ public class Usuarios_Dispositivos_PK implements Serializable {
     @Column(name = "desde")
     private Timestamp desde;
 
-    // Required: default constructor
+    // Required
     public Usuarios_Dispositivos_PK() {}
 
-    // Optional: constructor with fields
+    // Optional
     public Usuarios_Dispositivos_PK(Integer idUsuario, Integer idDispositivo, Timestamp desde) {
         this.idUsuario = idUsuario;
         this.idDispositivo = idDispositivo;

@@ -122,12 +122,6 @@ public class UsuariosController {
         return usuariosService.obtenerUsuarioPorNombre(nombreUsuario);
     }
 
-//    @GetMapping("/{id}")
-//    public Usuarios getUsuarioById(@PathVariable Integer id) {
-//        return usuarioRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id " + id));
-//    }
-
     @PutMapping("/{id}")
     public Usuarios updateUsuario(@RequestBody Usuarios usuario) {
         return usuariosService.updateUsuario(usuario);        

@@ -34,7 +34,7 @@ public class Usuarios_Dispositivos {
     @Column(name = "asignado_por")
     private Integer asignadoPor;
 
-    // Constructors
+    // Constructores
 
     public Usuarios_Dispositivos() {}
 

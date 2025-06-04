@@ -25,7 +25,7 @@ public class Posiciones {
 
     private LocalDateTime timestamp;
 
-    // GeoJSON location field with coordinates: [longitude, latitude]
+    // GeoJSON location, campo con coordenadas: [longitude, latitude]
     private GeoJsonPoint location;
 
     public Posiciones() {}

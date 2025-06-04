@@ -32,8 +32,7 @@ public class TargetsController {
     @GetMapping
     public List<Targets> obtenerTodasLasTareas() {
         return targetsService.getAllTargets();
-    }
-    
+    }    
     
     @GetMapping("/dispositivo/{id}")
     public ResponseEntity<List<Targets>> getTargetsByDispositivoId(@PathVariable Integer id) {
@@ -90,6 +89,5 @@ public class TargetsController {
 //        return ResponseEntity.ok(targets);
 //    }
 
-    // other endpoints...
 }
 

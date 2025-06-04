@@ -15,12 +15,12 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface PosicionesRepository extends MongoRepository<Posiciones, String> {
 
-    // Find all positions by device ID
+    // Buscar todalas posicions por ID dispositivo.
     List<Posiciones> findByIdDispositivo(int idDispositivo);
 
-    // Find all positions by device ID and timestamp between start and end dates
+    // Buscar posicions por ID dispositivo e rango datas (dende, ata)
     List<Posiciones> findByIdDispositivoAndTimestampBetween(int idDispositivo, LocalDateTime start, LocalDateTime end);
 
-    // Delete positions by device ID (optional)
+    // Eliminar posicions por ID dispositivo
     void deleteByIdDispositivo(int idDispositivo);
 }

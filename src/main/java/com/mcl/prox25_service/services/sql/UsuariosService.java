@@ -30,6 +30,47 @@ public class UsuariosService {
         return usuariosRepository.findById(id).orElse(null);
     }
     
+    
+    public Usuarios obtenerUsuarioPorNombre(String nombre) {
+    Optional<Usuarios> optionalUsuario = usuariosRepository.findByNombreUsuario(nombre);
+
+    if (optionalUsuario.isPresent()) {
+        Usuarios usuario = optionalUsuario.get();
+        return usuario;
+    }
+    return null;    
+    }
+    
+    public Usuarios obtenerUsuarioPorEmail(String email) {
+    return usuariosRepository.findByEmail(email).orElse(null);
+}    
+
+
+    public Usuarios guardarUsuario(Usuarios usuario) {
+        return usuariosRepository.save(usuario);
+    }
+    
+    public boolean autenticarUsuario(String user, String pass) {
+    Optional<Usuarios> optionalUsuario = usuariosRepository.findByNombreUsuario(user);
+
+    if (optionalUsuario.isPresent()) {
+        Usuarios usuario = optionalUsuario.get();
+        if (usuario != null && usuario.getContrasena().equals(pass)) {
+            return true;
+        }
+    }
+    return false;
+}
+    
+    public Usuarios updateUsuario(Usuarios usuario) {
+    return usuariosRepository.save(usuario);
+    }
+    
+    public void deleteUsuario(Integer id) {
+        usuariosRepository.deleteById(id);
+    }
+    
+    
 //    public boolean iniciarTareaUsuario(Integer idTarea, Integer userId){
 //       Optional<Usuarios> optionalUsuario = usuariosRepository.findById(userId);
 //       Optional<Tareas> optionalTarea = tareasRepository.findById(idTarea);
@@ -60,54 +101,5 @@ public class UsuariosService {
 //        }
 //       return false;   
 //    }
-    
-    public Usuarios obtenerUsuarioPorNombre(String nombre) {
-    Optional<Usuarios> optionalUsuario = usuariosRepository.findByNombreUsuario(nombre);
-
-    if (optionalUsuario.isPresent()) {
-        Usuarios usuario = optionalUsuario.get();
-        return usuario;
-    }
-    return null;    
-    }
-    
-    public Usuarios obtenerUsuarioPorEmail(String email) {
-    return usuariosRepository.findByEmail(email).orElse(null);
-}
-    
-//    public Usuarios obtenerUsuarioPorEmail(String email) {
-//    Optional<Usuarios> optionalUsuario = usuariosRepository.findByEmailUsuario(email);
-//
-//    if (optionalUsuario.isPresent()) {
-//        Usuarios usuario = optionalUsuario.get();
-//        return usuario;
-//    }
-//    return null;
-//    
-//    }
-
-    public Usuarios guardarUsuario(Usuarios usuario) {
-        return usuariosRepository.save(usuario);
-    }
-    
-    public boolean autenticarUsuario(String user, String pass) {
-    Optional<Usuarios> optionalUsuario = usuariosRepository.findByNombreUsuario(user);
-
-    if (optionalUsuario.isPresent()) {
-        Usuarios usuario = optionalUsuario.get();
-        if (usuario != null && usuario.getContrasena().equals(pass)) {
-            return true;
-        }
-    }
-    return false;
-}
-    
-    public Usuarios updateUsuario(Usuarios usuario) {
-    return usuariosRepository.save(usuario);
-    }
-    
-    public void deleteUsuario(Integer id) {
-        usuariosRepository.deleteById(id);
-    }
     
 }

@@ -54,7 +54,7 @@ public class Dispositivos {
     private Usuarios creadoPor;
 
     @ManyToMany(mappedBy = "dispositivos")
-    //@JsonManagedReference(value = "dispositivos-targets")
+    //@JsonManagedReference(value = "dispositivos-targets") //futuro manejo de relaciones bidireccional
     private Set<Targets> targets = new HashSet<>();
 
 

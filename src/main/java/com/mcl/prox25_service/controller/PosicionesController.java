@@ -31,7 +31,7 @@ public class PosicionesController {
     @Autowired
     private PosicionesService posicionesService;
 
-    // 1) Get all positions for a device (no date filtering)
+    // 1) Posiciones para un dispositivo (sin fiiltro fecha)
     @GetMapping("/device/{id_dispositivo}/all")
     public ResponseEntity<List<Posiciones>> getAllPositionsByDevice(@PathVariable int id_dispositivo) {
         List<Posiciones> posiciones = posicionesService.getPosicionesporIdDisp(id_dispositivo);
@@ -41,7 +41,7 @@ public class PosicionesController {
         return ResponseEntity.ok(posiciones);
     }
     
-     // 2) Get positions filtered by date range
+     // 2) Get posiciones por rango de fechas
     @GetMapping("/device/{dispId}/filtered")
     public ResponseEntity<List<Posiciones>> posicionesporDispIdRangoFechas(
             @PathVariable int dispId,
@@ -57,14 +57,14 @@ public class PosicionesController {
     }
     
 
-    // Insert a new position entry
+    // insertar nueva posicion
     @PostMapping
     public ResponseEntity<Posiciones> nuevaPosicion(@RequestBody Posiciones posicion) {
         Posiciones created = posicionesService.insertarPos(posicion);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-//    // Optional: get all positions (maybe limited)
+//    // Uso opcional (por agora non necesario)
 //    @GetMapping
 //    public ResponseEntity<List<Posiciones>> getAllPositions() {
 //        List<Posiciones> allPositions = posicionesService.getAll();

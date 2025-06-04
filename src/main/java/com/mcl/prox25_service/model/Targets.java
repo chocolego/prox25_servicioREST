@@ -24,6 +24,7 @@ import java.util.Set;
  *
  * @author lmcancela
  */
+
 @Entity
 @Table(name = "Targets")
 public class Targets {
@@ -48,7 +49,7 @@ public class Targets {
 
     @ManyToMany
     //@JsonBackReference(value = "dispositivos-targets")
-    @JsonIgnore
+    @JsonIgnore  //evitar bucles autoreferencia
     @JoinTable(
             name = "Dispositivo_Target",
             joinColumns = @JoinColumn(name = "id_target"),
@@ -106,7 +107,6 @@ public class Targets {
     public void setDispositivos(Set<Dispositivos> dispositivos) {
         this.dispositivos = dispositivos;
     }
-    
     
 
     @Override

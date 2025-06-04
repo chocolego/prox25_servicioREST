@@ -21,22 +21,22 @@ public class PosicionesService {
     @Autowired
     private PosicionesRepository posicionRepository;
 
-    // Get all positions for a device (no date filtering)
+    // GET Todalas posicions filtrando por IDDispositivo
     public List<Posiciones> getPosicionesporIdDisp(int dispId) {
         return posicionRepository.findByIdDispositivo(dispId);
     }
 
-    // Get positions filtered by date range for a device
+    // Get posicions filtrando por IDDispositivo e rango datas
     public List<Posiciones> buscarFiltrandoporFechas(int dispId, LocalDateTime desde, LocalDateTime hasta) {
         return posicionRepository.findByIdDispositivoAndTimestampBetween(dispId, desde, hasta);
     }
 
-    // nueva posicion
+    // nova posicion
     public Posiciones insertarPos(Posiciones posicion) {
         return posicionRepository.save(posicion);
     }
 
-    // Optionally, delete positions by some criteria if needed
+    // Uso opcional (por agora non necesario)
     public void borrarPosicionesdeDispositivo(int dispId) {
         posicionRepository.deleteByIdDispositivo(dispId);
     }

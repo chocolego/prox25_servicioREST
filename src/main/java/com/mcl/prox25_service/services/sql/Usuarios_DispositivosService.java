@@ -24,34 +24,12 @@ public class Usuarios_DispositivosService {
     @Autowired
     private Usuarios_DispositivosRepository usuariosDispositivosRepository;
 
-    // Get all Usuarios_Dispositivos entries
+    // Get all rexistros de Usuarios_Dispositivos 
     public List<Usuarios_Dispositivos> getAll() {
         return usuariosDispositivosRepository.findAll();
     }
-//
-//    // Get dispositivos for a user with hasta = NULL (active)
-//    public List<Dispositivos> getDispositivosActivosPorUsuario(Integer idUsuario) {
-//        return usuariosDispositivosRepository.findByIdUsuarioAndHastaIsNull(idUsuario)
-//                .stream()
-//                .map(Usuarios_Dispositivos::getDispositivo)
-//                .collect(Collectors.toList());
-//    }
-//
-//    // Get dispositivos para user con hasta != NULL (inactivo)
-//    public List<Dispositivos> getDispositivosInactivosPorUsuario(Integer idUsuario) {
-//        return usuariosDispositivosRepository.findByIdUsuarioAndHastaIsNotNull(idUsuario)
-//                .stream()
-//                .map(Usuarios_Dispositivos::getDispositivo)
-//                .collect(Collectors.toList());
-//    }
-//
-//    // Optional: get all assignments by user
-//    public List<Usuarios_Dispositivos> getAsignacionesPorUsuario(Integer idUsuario) {
-//        return usuariosDispositivosRepository.findByIdUsuario(idUsuario);
-//    }
-
     
-    // Get all dispositivos for a user (regardless of 'hasta')
+    // Get all dispositivos para usuario (sen filtrar por 'hasta')
     public List<Dispositivos> getDispositivosByUsuarioId(Integer idUsuario) {
         List<Usuarios_Dispositivos> udsList = usuariosDispositivosRepository.findById_IdUsuario(idUsuario);
         return udsList.stream()
@@ -73,7 +51,30 @@ public class Usuarios_DispositivosService {
         return udsList.stream()
                       .map(Usuarios_Dispositivos::getDispositivo)
                       .collect(Collectors.toList());
-    } 
+    }
+    
+    //
+//    // Get dispositivos for a user with hasta = NULL (active)
+//    public List<Dispositivos> getDispositivosActivosPorUsuario(Integer idUsuario) {
+//        return usuariosDispositivosRepository.findByIdUsuarioAndHastaIsNull(idUsuario)
+//                .stream()
+//                .map(Usuarios_Dispositivos::getDispositivo)
+//                .collect(Collectors.toList());
+//    }
+//
+//    // Get dispositivos para user con hasta != NULL (inactivo)
+//    public List<Dispositivos> getDispositivosInactivosPorUsuario(Integer idUsuario) {
+//        return usuariosDispositivosRepository.findByIdUsuarioAndHastaIsNotNull(idUsuario)
+//                .stream()
+//                .map(Usuarios_Dispositivos::getDispositivo)
+//                .collect(Collectors.toList());
+//    }
+//
+//    // Optional: get all assignments by user
+//    public List<Usuarios_Dispositivos> getAsignacionesPorUsuario(Integer idUsuario) {
+//        return usuariosDispositivosRepository.findByIdUsuario(idUsuario);
+//    }
+
     
 }
 

@@ -39,9 +39,10 @@ public class DispositivosService {
     public Dispositivos findByNumeroSerie(String numeroSerie) {
         return dispositivosRepository.findByNumeroSerie(numeroSerie).orElse(null);
     }
+
     public Set<Targets> getTargetsByDispositivoId(Integer id) {
-    Optional<Dispositivos> dispositivoOpt = dispositivosRepository.findById(id);
-    return dispositivoOpt.map(Dispositivos::getTargets).orElse(Collections.emptySet());
+        Optional<Dispositivos> dispositivoOpt = dispositivosRepository.findById(id);
+        return dispositivoOpt.map(Dispositivos::getTargets).orElse(Collections.emptySet());
     }
 
 }

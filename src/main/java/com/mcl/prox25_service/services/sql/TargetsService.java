@@ -46,19 +46,19 @@ public class TargetsService {
     
     public Targets assignDispositivoToTarget(Integer targetId, Integer dispositivoId) {
     Targets target = targetsRepository.findById(targetId)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Target not found with id: " + targetId));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Target no encontrado con id: " + targetId));
 
     Dispositivos dispositivo = dispositivosRepository.findById(dispositivoId)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dispositivo not found with id: " + dispositivoId));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dispositivo no encontrado con id: " + dispositivoId));
 
-    // ❌ Check si target está asignado
+    // Check si target está asignado
     if (!target.getDispositivos().isEmpty()) {
-        throw new ResponseStatusException(HttpStatus.CONFLICT, "Target already has a dispositivo assigned.");
+        throw new ResponseStatusException(HttpStatus.CONFLICT, "Este target ya tiene dispositivo asignado.");
     }
 
-        // ❌ Check dispositivo está asignado
+        // Check dispositivo está asignado
         if (target.getDispositivos().contains(dispositivo)) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Dispositivo already assigned to this target.");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Dispositivo ya asignado a otro target.");
         }
 
         // asignar
