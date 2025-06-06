@@ -64,7 +64,7 @@ public class Usuarios {
             joinColumns = {@JoinColumn(name = "id_usuario")},
             inverseJoinColumns = {@JoinColumn(name = "id_dispositivo")}
     )
-    Set<Dispositivos> dispostivosAsignados = new HashSet<>();
+    Set<Dispositivos> dispostivosAsignados = new HashSet<>();  //en vez de list, recomendado (evita duplicados)
     
     public Usuarios() {
     }
