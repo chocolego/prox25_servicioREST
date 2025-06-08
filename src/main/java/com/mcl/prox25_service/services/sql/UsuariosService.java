@@ -5,7 +5,10 @@
 package com.mcl.prox25_service.services.sql;
 
 import com.mcl.prox25_service.model.Usuarios;
+import com.mcl.prox25_service.model.Usuarios_Estado;
+import com.mcl.prox25_service.model.Usuarios_Estado.Status;
 import com.mcl.prox25_service.repository.sql.UsuariosRepository;
+import com.mcl.prox25_service.repository.sql.Usuarios_EstadoRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +20,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UsuariosService {
+
     @Autowired
     private UsuariosRepository usuariosRepository;
+    @Autowired
+    private Usuarios_EstadoRepository usuariosEstadoRepository;
 //    @Autowired
 //    private TareasRepository tareasRepository;
 
@@ -50,11 +56,17 @@ public class UsuariosService {
         return usuariosRepository.save(usuario);
     }
     
+    public boolean isUsuarioActivo(Usuarios usuario) {
+        String status = usuariosEstadoRepository.comprobarActivoUsuario(usuario);
+        return "activo".equalsIgnoreCase(status);
+    }
+    
     public boolean autenticarUsuario(String user, String pass) {
     Optional<Usuarios> optionalUsuario = usuariosRepository.findByNombreUsuario(user);
 
     if (optionalUsuario.isPresent()) {
-        Usuarios usuario = optionalUsuario.get();
+        Usuarios usuario = optionalUsuario.get();        
+       
         if (usuario != null && usuario.getContrasena().equals(pass)) {
             return true;
         }

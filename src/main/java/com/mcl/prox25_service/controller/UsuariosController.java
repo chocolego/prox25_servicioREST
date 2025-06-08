@@ -106,12 +106,16 @@ public class UsuariosController {
 
     
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Map<String,String> loginRequest) {
+    public ResponseEntity<String> login(@RequestBody Map<String, String> loginRequest) {
         boolean isAuthenticated = usuariosService.autenticarUsuario(loginRequest.get("user"), loginRequest.get("pass"));
         if (isAuthenticated) {
             Usuarios usuario = usuariosService.obtenerUsuarioPorNombre(loginRequest.get("user"));
             //Usuarios usuario = usuariosService.obtenerUsuarioPorEmail(loginRequest.get("user"));
+            if (!usuariosService.isUsuarioActivo(usuario)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Usuario no activo.");
+            }
             return ResponseEntity.ok(usuario.getId().toString());
+
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error en el login.");
         }
