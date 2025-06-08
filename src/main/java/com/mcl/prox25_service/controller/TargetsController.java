@@ -30,7 +30,7 @@ public class TargetsController {
     private TargetsService targetsService;
     
     @GetMapping
-    public List<Targets> obtenerTodasLasTareas() {
+    public List<Targets> obtenerTodasLosTargets() {
         return targetsService.getAllTargets();
     }    
     

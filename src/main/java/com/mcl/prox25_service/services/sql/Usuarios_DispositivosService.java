@@ -55,7 +55,7 @@ public class Usuarios_DispositivosService {
 
     // Get dispositivos filtrando por UsuarioID e sen targets asignados
     public List<Dispositivos> getDispositivosSinTargetsByUsuarioId(Integer usuarioId) {
-        List<Usuarios_Dispositivos> dispsLibres = usuariosDispositivosRepository.findById_IdUsuario(usuarioId);
+        List<Usuarios_Dispositivos> dispsLibres = usuariosDispositivosRepository.findById_IdUsuarioAndHastaIsNull(usuarioId);
 
         return dispsLibres.stream()
                 .map(Usuarios_Dispositivos::getDispositivo)

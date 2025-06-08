@@ -140,6 +140,16 @@ public class Usuarios {
         return fechaCreacion;
     }
 
+    public Set<Dispositivos> getDispostivosAsignados() {
+        return dispostivosAsignados;
+    }
+
+    public void setDispostivosAsignados(Set<Dispositivos> dispostivosAsignados) {
+        this.dispostivosAsignados = dispostivosAsignados;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Usuarios{" + "id=" + id + ", nombreUsuario=" + nombreUsuario + ", nombreDisplay=" + nombreDisplay + ", email=" + email + ", contrasena=" + contrasena + ", telefono=" + telefono + ", rol=" + rol + ", fechaCreacion=" + fechaCreacion + '}';

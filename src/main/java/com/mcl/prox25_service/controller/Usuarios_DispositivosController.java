@@ -6,8 +6,10 @@ package com.mcl.prox25_service.controller;
 
 import com.mcl.prox25_service.model.Dispositivos;
 import com.mcl.prox25_service.services.sql.DispositivosService;
+import com.mcl.prox25_service.services.sql.UsuariosService;
 import com.mcl.prox25_service.services.sql.Usuarios_DispositivosService;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +27,19 @@ public class Usuarios_DispositivosController {
 
     @Autowired
     private Usuarios_DispositivosService usuariosDispositivosService;
+    @Autowired
+    private UsuariosService usuariosService;
     
      @GetMapping("/usuarios/{usuarioId}/dispositivos")
     public ResponseEntity<List<Dispositivos>> getDispositivosByUsuario(@PathVariable Integer usuarioId) {
         List<Dispositivos> dispositivos = usuariosDispositivosService.getDispositivosByUsuarioId(usuarioId);
         return ResponseEntity.ok(dispositivos); // always returns 200 with list (empty if none)
     }
+    
+//     @GetMapping("/usuarios/{usuarioId}/dispositivos")
+//    public Set<Dispositivos> getDispositivosByUsuario(@PathVariable Integer usuarioId) {
+//        return usuariosService.obtenerUsuarioPorId(usuarioId).getDispostivosAsignados(); // always returns 200 with list (empty if none)
+//    }
 
     @GetMapping("/usuarios/{usuarioId}/dispositivos/activos")
     public ResponseEntity<List<Dispositivos>> getDispositivosActivosByUsuario(@PathVariable Integer usuarioId) {
