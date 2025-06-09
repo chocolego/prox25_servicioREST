@@ -7,6 +7,7 @@ package com.mcl.prox25_service.repository.sql;
 import com.mcl.prox25_service.model.Usuarios;
 import com.mcl.prox25_service.model.Usuarios_Estado;
 import com.mcl.prox25_service.model.Usuarios_Estado.Status;
+import java.sql.Timestamp;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,7 +23,14 @@ public interface Usuarios_EstadoRepository extends JpaRepository<Usuarios_Estado
 
     //Optional<Usuarios_Estado> findByUsuarioAndStatusAndHastaIsNull(Usuarios usuario, Status status);
     
-    @Query("SELECT ue.status FROM Usuarios_Estado ue WHERE ue.usuario = :usuario AND ue.hasta IS NULL")
-    String comprobarActivoUsuario(@Param("usuario") Usuarios usuario);
+//    @Query("SELECT ue.status FROM Usuarios_Estado ue WHERE ue.usuario = :usuario")
+//    String comprobarActivoUsuario(@Param("usuario") Usuarios usuario);
+    
+//    @Query("SELECT ue.hasta FROM Usuarios_Estado ue WHERE ue.usuario = :usuario ORDER BY ue.desde DESC")
+//    Timestamp findLatestHastaByUsuario(@Param("usuario") Usuarios usuario);
+    //Timestamp findFirstByUsuarioOrderByDesdeDesc(Usuarios usuario);
+    @Query("SELECT ue.hasta FROM Usuarios_Estado ue WHERE ue.usuario = :usuario ORDER BY ue.desde DESC")
+    Optional<Timestamp> findTopHastaByUsuarioOrderByDesdeDesc(@Param("usuario") Usuarios usuario);
+
 }
 

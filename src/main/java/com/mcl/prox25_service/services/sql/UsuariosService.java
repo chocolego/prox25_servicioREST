@@ -9,6 +9,7 @@ import com.mcl.prox25_service.model.Usuarios_Estado;
 import com.mcl.prox25_service.model.Usuarios_Estado.Status;
 import com.mcl.prox25_service.repository.sql.UsuariosRepository;
 import com.mcl.prox25_service.repository.sql.Usuarios_EstadoRepository;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,16 +51,49 @@ public class UsuariosService {
     public Usuarios obtenerUsuarioPorEmail(String email) {
     return usuariosRepository.findByEmail(email).orElse(null);
 }    
-
-
-    public Usuarios guardarUsuario(Usuarios usuario) {
-        return usuariosRepository.save(usuario);
-    }
     
-    public boolean isUsuarioActivo(Usuarios usuario) {
-        String status = usuariosEstadoRepository.comprobarActivoUsuario(usuario);
-        return "activo".equalsIgnoreCase(status);
+    public Usuarios guardarUsuario(Usuarios usuario) {
+    Usuarios nuevoUsuario = usuariosRepository.save(usuario);
+
+    Usuarios_Estado estado = new Usuarios_Estado();  //insertado como activo
+    estado.setUsuario(nuevoUsuario);
+    estado.setStatus(Usuarios_Estado.Status.activo);
+    estado.setDesde(new Timestamp(System.currentTimeMillis()));
+    usuariosEstadoRepository.save(estado);
+
+    return nuevoUsuario;
+}
+
+
+
+//    public Usuarios guardarUsuario(Usuarios usuario) {
+//        return usuariosRepository.save(usuario);
+//    }
+
+    public String obtenerEstadoUsuario(Usuarios usuario) {
+        Optional<Timestamp> latestHastaOpt = usuariosEstadoRepository.findTopHastaByUsuarioOrderByDesdeDesc(usuario);
+    if (latestHastaOpt.isEmpty() || latestHastaOpt.get() == null) {
+        return "activo";
+    } else {
+        return "inactivo";
     }
+    }
+
+//    public String getEstadoUsuario(Usuarios usuario) {
+//    Timestamp latestHasta = usuariosEstadoRepository.findLatestHastaByUsuario(usuario);
+//    if (latestHasta == null) {
+//        return "activo";
+//    } else {
+//        return "inactivo";
+//    }
+//}public String getEstadoUsuario(Usuarios usuario) {
+//    Timestamp latestHasta = usuariosEstadoRepository.findLatestHastaByUsuario(usuario);
+//    if (latestHasta == null) {
+//        return "activo";
+//    } else {
+//        return "inactivo";
+//    }
+//}
     
     public boolean autenticarUsuario(String user, String pass) {
     Optional<Usuarios> optionalUsuario = usuariosRepository.findByNombreUsuario(user);

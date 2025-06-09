@@ -111,9 +111,10 @@ public class UsuariosController {
         if (isAuthenticated) {
             Usuarios usuario = usuariosService.obtenerUsuarioPorNombre(loginRequest.get("user"));
             //Usuarios usuario = usuariosService.obtenerUsuarioPorEmail(loginRequest.get("user"));
-            if (!usuariosService.isUsuarioActivo(usuario)) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Usuario no activo.");
-            }
+        String estado = usuariosService.obtenerEstadoUsuario(usuario);
+        if (!"activo".equals(estado)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("inactivo.");
+        }
             return ResponseEntity.ok(usuario.getId().toString());
 
         } else {
